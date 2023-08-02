@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+
+</head>
+
+
+<body>
+
+    <script>
+function getComputerChoice() {
+  const choices = ['rock', 'paper', 'scissors'];
+  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+  return computerChoice;
+}
+
+function playRound(playerSelection, computerSelection) {
+  playerSelection = playerSelection.toLowerCase();
+
+  if (playerSelection === computerSelection) {
+    return "It's a tie!";
+  }
+  if (
+    (playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'paper' && computerSelection === 'rock') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper')
+  ) {
+    return "You win! " + playerSelection + " beats " + computerSelection;
+  }
+
+  return "You lose! Paper beats Rock";
+}
+
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+
+  console.log("Game start!");
+
+  const buttons = document.querySelectorAll('playerChoiceButton');
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      const playerSelection = button.value;
+      const computerSelection = getComputerChoice();
+
+      const result = playRound(playerSelection, computerSelection);
+      console.log(result);
+
+      if (result.includes("win")) {
+        playerScore++;
+      } else if (result.includes("lose")) {
+        computerScore++;
+      }
+
+      console.log("Player score: " + playerScore);
+      console.log("Computer score: " + computerScore);
+
+      if (playerScore + computerScore >= 5) {
+        console.log("Game over!");
+
+        if (playerScore > computerScore) {
+          console.log("Congratulations! You win the game!");
+        } else if (playerScore < computerScore) {
+          console.log("Oops! You lose the game!");
+        } else {
+          console.log("It's a tie! The game ends in a draw!");
+        }
+      }
+    });
+  });
+
+}
+
+game();
+       
+        </script>
+
+<button id="playerChoiceButton" value="rock">Rock</button>
+<button id="playerChoiceButton" value="paper">Paper</button>
+<button id="playerChoiceButton" value="scissors">Scissors</button>
+
+</body>
+</html>
