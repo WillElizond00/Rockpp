@@ -46,20 +46,31 @@ console.log('Player choice:', userSelection);
 const computerSelection = getComputerChoice();
 console.log(playRound(userSelection, computerSelection));
 
-
-
-
-function game(){
 let playerScore = 0;
 let computerScore = 0;
 
-for(let i = 0; i < 5; i++) {
-    let playerSelection = prompt('Please choose Rock, Paper, or Scissors');
+let currentRound = 0;
+const maxRounds = 5;
+
+
+function game(playerSelection){
+
+    if(currentRound >= maxRounds){
+        console.log('Game over!');
+        return;
+    }
+
+currentRound++;
+console.log(`Round ${currentRound}`);
+
+//for(let i = 0; i < 5; i++) {
+  //  let playerSelection2 = playerSelection;
 
 let  computerSelection = getComputerChoice();
 let result = playRound(playerSelection, computerSelection);
 
-console.log(`Round ${i+1} - Result: ${result}`);
+//console.log(`Round ${i+1} - Result: ${result}`);
+console.log(`Result: ${result}`);
 
 if (result === 'Player wins!'){
     playerScore++;
@@ -67,11 +78,11 @@ if (result === 'Player wins!'){
     computerScore++;
 }
 
-if(i < 4){
+//if(i < 4){
 console.log(`Current Score - Player: ${playerScore}, Computer: ${computerScore}`);
-}
-}
-console.log(`Final Score - Player: ${playerScore}, Computer: ${computerScore}`);
+//}
+//}
+//console.log(`Final Score - Player: ${playerScore}, Computer: ${computerScore}`);
 
  }
 
@@ -81,23 +92,25 @@ console.log(`Final Score - Player: ${playerScore}, Computer: ${computerScore}`);
  const scissorButton = document.getElementById("scissorButton");
 
  rockButton.addEventListener("click", function(){
-    playGame("rock");
+    game('rock');
  });
 
  paperButton.addEventListener("click", function(){
-    playGame("paper");
+    game('paper');
  });
 
  scissorButton.addEventListener("click", function(){
-    playGame("scissors");
+    game('scissors');
  });
 
+
+ /*
  function playGame(playerSelection) {
     const computerSelection = getComputerChoice();
     const result = playRound(playerSelection, computerSelection);
     console.log(result);
  }
-
+*/
 
     </script>
     
