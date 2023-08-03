@@ -8,6 +8,9 @@
 
 <body>
     
+    <button id="rockButton" value="rock">Rock</button>
+    <button id="paperButton" value="paper">Paper</button>
+    <button id="scissorButton" value="scissors">Scissors</button>
 
     <script>
 
@@ -38,10 +41,10 @@ function playRound(playerSelection, computerSelection){
     
 }
 
-const playerSelection = 'rock';
-console.log('Player choice:', playerSelection);
+const userSelection = 'rock';
+console.log('Player choice:', userSelection);
 const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+console.log(playRound(userSelection, computerSelection));
 
 
 
@@ -73,9 +76,31 @@ console.log(`Final Score - Player: ${playerScore}, Computer: ${computerScore}`);
  }
 
 
+ const rockButton = document.getElementById("rockButton");
+ const paperButton = document.getElementById("paperButton");
+ const scissorButton = document.getElementById("scissorButton");
+
+ rockButton.addEventListener("click", function(){
+    playGame("rock");
+ });
+
+ paperButton.addEventListener("click", function(){
+    playGame("paper");
+ });
+
+ scissorButton.addEventListener("click", function(){
+    playGame("scissors");
+ });
+
+ function playGame(playerSelection) {
+    const computerSelection = getComputerChoice();
+    const result = playRound(playerSelection, computerSelection);
+    console.log(result);
+ }
+
+
     </script>
     
-
 </body>
 
 </html>
