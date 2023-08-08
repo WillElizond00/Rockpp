@@ -10,7 +10,7 @@
     
     <button id="rockButton" value="rock">Rock</button>
     <button id="paperButton" value="paper">Paper</button>
-    <button id="scissorButton" value="scissors">Scissors</button>
+    <button id="scissorsButton" value="scissors">Scissors</button>
 
     <script>
 
@@ -41,61 +41,87 @@ function playRound(playerSelection, computerSelection){
     
 }
 
-//
 
- const rockButton = document.getElementById("rockButton");
- const paperButton = document.getElementById("paperButton");
- const scissorButton = document.getElementById("scissorButton");
 
- rockButton.addEventListener("click", function(){
-    playGame("rock");
- });
+function playGame(playerSelection) {
 
- paperButton.addEventListener("click", function(){
-    playGame("paper");
- });
+console.log("Beginning of playGame, counter:", counter);
 
- scissorButton.addEventListener("click", function(){
-    playGame("scissors");
- });
 
- let playerScore = 0;
-    let computerScore = 0;
-let counter = 0; 
-let roundsPlayed = 0;
+if (counter >= 5) {
+console.log('Maximum # of rounds played. Game over!');
+rockButton.removeEventListener('click', rockClickHandler)
+paperButton.removeEventListener('click', paperClickHandler)
+scissorsButton.removeEventListener('click', scissorsClickHandler)
+return;
+}
 
- function playGame(playerSelection) {
-    const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection);
-    console.log('Player choice:',playerSelection);
-    console.log(result);
 
+const computerSelection = getComputerChoice();
+const result = playRound(playerSelection, computerSelection);
+console.log('Player choice:',playerSelection);
+console.log(result);
 
 if (result === 'Player wins!'){
-    playerScore++ 
+playerScore++ 
 } else if (result === 'Computer wins!'){
-    computerScore++;
+computerScore++;
 }
-    counter++;
+
+console.log("Before incrementing, counter:", counter);
+counter++;
 
 
 console.log(`Player: ${playerScore} - Computer: ${computerScore}`);
 
-if (counter === 5){
-console.log(`Game over! Let's see who won!`)
-console.log(`Final score: Player ${playerScore} - Computer ${computerScore}`);
 
-counter = 0;
-playerScore = 0;
-computerScore = 0;
-roundsPlayed++;
-if (roundsPlayed === 5) {
-    console.log('Maximum # of rounds played. Game over!');
-    rockButton.removeEventListener('click', rockClickHandler)
-}
+
+// if (counter === 5){
+// console.log(`Game over! Let's see who won!`)
+// console.log(`Final score: Player ${playerScore} - Computer ${computerScore}`);
+
+//counter = 0;
+//playerScore = 0;
+//computerScore = 0;
+
+//}
+
+};
+//
+
+
+function rockClickHandler(){
+    playGame("rock");
+
 }
 
- };
+function paperClickHandler(){
+    playGame("paper");
+
+}
+
+function scissorsClickHandler(){
+    playGame("scissors");
+}
+
+
+ const rockButton = document.getElementById("rockButton");
+ const paperButton = document.getElementById("paperButton");
+ const scissorsButton = document.getElementById("scissorsButton");
+
+ rockButton.addEventListener("click", rockClickHandler)
+
+ paperButton.addEventListener("click", paperClickHandler);
+
+ scissorsButton.addEventListener("click", scissorsClickHandler);
+
+ let playerScore = 0;
+    let computerScore = 0;
+let counter = 0; 
+
+
+
+ 
 
 
     </script>
