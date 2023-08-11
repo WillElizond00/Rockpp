@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+</head>    
 
 <body>
     
-    <button id="rockButton" value="rock">Rock</button>
-    <button id="paperButton" value="paper">Paper</button>
-    <button id="scissorsButton" value="scissors">Scissors</button>
+    <button id="rockButton" value="rock" class="btn">Rock</button>
+    <button id="paperButton" value="paper" class="btn">Paper</button>
+    <button id="scissorsButton" value="scissors" class="btn">Scissors</button>
+
+
+<div id="results">Results will appear here.<br></div>    
+<div id="score">Player: 0 - Computer: 0</div> 
 
     <script>
+        let playerScore = 0;
+           let computerScore = 0;
+           let counter = 0; 
+           
+
+           function displayMessage(message){
+               const resultsDiv = document.getElementById('results');
+resultsDiv.innerHTML += message + '<br>';    
+}
+
+
+
 
 function getComputerChoice() {
-const choices = ['rock', 'paper', 'scissors'];
+const choices = ['rock', 'paper', 'scissors'];    
 const computerChoice = choices[Math.floor(Math.random()* choices.length)];
-console.log('Computer choice:', computerChoice);
+//displayMessage('Computer choice: ' + computerChoice);
+// console.log('Computer choice:', computerChoice);
 return computerChoice;
 }
 
-//big weiner
+//
 
 function playRound(playerSelection, computerSelection){
 
@@ -45,49 +62,62 @@ function playRound(playerSelection, computerSelection){
 
 function playGame(playerSelection) {
 
-console.log("Beginning of playGame, counter:", counter);
+    if (counter >= 5) {
+        return console.log("GAME OVER")
+    }
+
+    const computerSelection = getComputerChoice();
+    
+    displayMessage('Player choice: ' + playerSelection);
+    displayMessage('Computer choice: ' + computerSelection);
+    
+    const result = playRound(playerSelection, computerSelection);
+    displayMessage(result);
+    
+    if (result === 'Player wins!'){
+    playerScore++ 
+    } else if (result === 'Computer wins!'){
+    computerScore++;    
+    }
+    
+    counter++;
 
 
-if (counter >= 5) {
-console.log('Maximum # of rounds played. Game over!');
-rockButton.removeEventListener('click', rockClickHandler)
-paperButton.removeEventListener('click', paperClickHandler)
-scissorsButton.removeEventListener('click', scissorsClickHandler)
-return;
+    document.getElementById('score').textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+    //displayMessage(`Player: ${playerScore} - Computer: ${computerScore}`)
+    //console.log(`Player: ${playerScore} - Computer: ${computerScore}`);
+
+
+    //displayMessage('Maximum # of rounds played. Game over!')
+
+
+    
+    if (counter === 5){
+        if (playerScore > computerScore){
+            displayMessage('Player wins the game!');
+        } else if (playerScore < computerScore){
+            displayMessage('Computer wins the game!');
+        } else {
+            displayMessage('The game is a tie!');
+        }
+        
+        displayMessage('Maximum # of rounds played. Game over!');
+        displayMessage("Gam over! Click refresh if you want to play again");
+
+        rockButton.removeEventListener("click", rockClickHandler);
+        paperButton.removeEventListener("click", paperClickHandler);
+        scissorsButton.removeEventListener("click", scissorsClickHandler);
+        
+    }
+
+
 }
+    
 
 
-const computerSelection = getComputerChoice();
-const result = playRound(playerSelection, computerSelection);
-console.log('Player choice:',playerSelection);
-console.log(result);
-
-if (result === 'Player wins!'){
-playerScore++ 
-} else if (result === 'Computer wins!'){
-computerScore++;
-}
-
-console.log("Before incrementing, counter:", counter);
-counter++;
-
-
-console.log(`Player: ${playerScore} - Computer: ${computerScore}`);
-
-
-
-// if (counter === 5){
-// console.log(`Game over! Let's see who won!`)
-// console.log(`Final score: Player ${playerScore} - Computer ${computerScore}`);
-
-//counter = 0;
-//playerScore = 0;
-//computerScore = 0;
-
-//}
-
-};
-//
+const rockButton = document.getElementById("rockButton");
+const paperButton = document.getElementById("paperButton");
+const scissorsButton = document.getElementById("scissorsButton");
 
 
 function rockClickHandler(){
@@ -102,23 +132,16 @@ function paperClickHandler(){
 
 function scissorsClickHandler(){
     playGame("scissors");
-}
+}    
 
 
- const rockButton = document.getElementById("rockButton");
- const paperButton = document.getElementById("paperButton");
- const scissorsButton = document.getElementById("scissorsButton");
 
  rockButton.addEventListener("click", rockClickHandler)
 
  paperButton.addEventListener("click", paperClickHandler);
 
  scissorsButton.addEventListener("click", scissorsClickHandler);
-
- let playerScore = 0;
-    let computerScore = 0;
-let counter = 0; 
-
+ 
 
 
  
